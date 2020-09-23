@@ -9,8 +9,8 @@ cd  zabbix-3.4.4/	               #进入编译目录
 ./configure  --enable-agent     #配置zabbix
 make  install		#安装zabbix
 #------修改agent配置文件------
-sed -i '93c Server=127.0.0.1,172.31.61.52 ' /usr/local/etc/zabbix_agentd.conf
-sed -i '134c ServerActive=172.31.61.52:10051' /usr/local/etc/zabbix_agentd.conf
+sed -i '93c Server=127.0.0.1,ec2-44-242-54-71.us-west-2.compute.amazonaws.com ' /usr/local/etc/zabbix_agentd.conf
+sed -i '134c ServerActive=ec2-44-242-54-71.us-west-2.compute.amazonaws.com:10051' /usr/local/etc/zabbix_agentd.conf
 sed -i '280c UnsafeUserParameters=1' /usr/local/etc/zabbix_agentd.conf
 sed -i '245c AllowRoot=1' /usr/local/etc/zabbix_agentd.conf
 #--------进入自定义key目录，并创建监控key文件
@@ -24,3 +24,4 @@ echo zabbix_agentd  >> /etc/rc.local
 chmod +x  /etc/rc.local
 iptables -A OUTPUT -p tcp --dport 10050 -j ACCEPT
 iptables -A INPUT -p tcp --dport 10051 -j ACCEPT
+iptables-save > /etc/sysconfig/iptables
