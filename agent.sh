@@ -13,6 +13,7 @@ sed -i '93c Server=127.0.0.1,ec2-44-242-54-71.us-west-2.compute.amazonaws.com ' 
 sed -i '134c ServerActive=ec2-44-242-54-71.us-west-2.compute.amazonaws.com:10051' /usr/local/etc/zabbix_agentd.conf
 sed -i '280c UnsafeUserParameters=1' /usr/local/etc/zabbix_agentd.conf
 sed -i '245c AllowRoot=1' /usr/local/etc/zabbix_agentd.conf
+sed -i '264s/#//' /usr/local/etc/zabbix_agentd.conf
 #--------进入自定义key目录，并创建监控key文件
 cd  /usr/local/etc/zabbix_agentd.conf.d/
 echo UserParameter=tcpportlisten,/bin/bash /tmp/discover_port.sh "$1" > tcp_port.key
