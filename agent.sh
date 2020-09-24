@@ -2,7 +2,7 @@
 yum  -y  install  gcc   pcre-devel  autoconf
 
                                               #下载端口监控脚本
-mv discover_port  /tmp/          #移动脚本
+mv discover_port.sh  /tmp/          #移动脚本
                                                #下载zabbix源码包
 tar  -xf  zabbix-3.4.4.tar.gz       #解压zabbix源码包
 cd  zabbix-3.4.4/	               #进入编译目录
@@ -23,6 +23,8 @@ zabbix_agentd
 #----------设置zabbix服务开机自启-----
 echo zabbix_agentd  >> /etc/rc.local
 chmod +x  /etc/rc.local
-iptables -A OUTPUT -p tcp --dport 10050 -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 10050 -j ACCEPT
 iptables -A INPUT -p tcp --dport 10051 -j ACCEPT
 iptables-save > /etc/sysconfig/iptables
+iptables -n -L --line-numbers
+ss -ntulp | grep :10050 
